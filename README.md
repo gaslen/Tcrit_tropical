@@ -1,4 +1,4 @@
-This code is associated with the Nature Plants submission **"Tropical forests are nearing critical temperature limits"**.
+This code is associated with the Nature Communications submission **"Tropical forests are nearing critical temperature limits"**.
 
 # Folder contents
 -  **delta_temp**: code used to output the TSM maps and the map of the directing coefficients of linear regressions at each pixel (slope.py). Also, compute the TSM variations by quantile (biome_continent_mean_per_year.py).
