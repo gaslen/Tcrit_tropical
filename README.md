@@ -3,7 +3,7 @@
 This repository contains the code associated with the PNAS submission **"Tropical forests are nearing critical temperature limits"**.
 
 ### **Data Access**
-- **Public Data:** All associated data can be accessed [here](<link_to_data>).
+- **Public Data:** All associated data will be accessed [here](<link_to_data>).
 - **ECEO Members:** Data is also available at:  
   ```
   eceosrv1_nas/Datasets/gaston/ecostress_data/
