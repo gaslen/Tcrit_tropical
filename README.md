@@ -4,10 +4,6 @@ This repository contains the code associated with the PNAS submission **"Tropica
 
 ### **Data Access**
 - **Public Data:** All associated data will be accessed [here](<link_to_data>).
-- **ECEO Members:** Data is also available at:  
-  ```
-  eceosrv1_nas/Datasets/gaston/ecostress_data/
-  ```
 
 ### **Setup**
 To set up the Python environment, run:
