@@ -108,7 +108,7 @@ shape_full_map = rio.open(
 
 interpolated_modis_folder = (
     DATA_PATH
-    + "/MaxMonthlyMODIS_fixed_scale_and_nans_with_clean_preprocessing_interpolatedv2"
+    + "/MODIS_LST"
 )
 modis_files = sorted(glob(join(interpolated_modis_folder, "*.tif")))
 modis_files = [
