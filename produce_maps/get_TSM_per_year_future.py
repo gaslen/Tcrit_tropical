@@ -7,7 +7,7 @@ from utils import (
     DATA_PATH,
     d_sl,
     dense_vegetation,
-    interpolated_modis_folder,
+    modis_folder,
     modis_files,
     version,
 )
@@ -20,10 +20,10 @@ def get_exceeding_map(ext, sl, year="2001"):
     data_species_ = np.zeros(Tcrit_map[sl].shape) - 1000
     modis_files_ = [i for i in modis_files if f"/{year}" in i]
     for i, modis_file in tqdm(enumerate(modis_files_), total=len(modis_files_)):
-        interpolated_modis = rio.open(
-            join(interpolated_modis_folder, basename(modis_file)), "r"
+        modis = rio.open(
+            join(modis_folder, basename(modis_file)), "r"
         )
-        m = interpolated_modis.read(1)
+        m = modis.read(1)
         quant_inf = m < np.nanquantile(m, 0.01)
         m[m > np.nanquantile(m, 0.99)] = np.nan
         m[quant_inf] = np.nan

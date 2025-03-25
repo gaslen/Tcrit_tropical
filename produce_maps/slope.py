@@ -10,7 +10,7 @@ from utils import (
     rio,
     np,
     modis_files,
-    interpolated_modis_folder,
+    modis_folder,
     dense_vegetation,
     ssp,
     version,
@@ -38,10 +38,10 @@ for ext, sl in d_sl.items():
         out = np.zeros((*Tcrit.shape, 20), dtype=np.float16) - 1000
         for i, modis_file in tqdm(enumerate(modis_files), total=len(modis_files)):
             j = i // 12
-            interpolated_modis = rio.open(
-                join(interpolated_modis_folder, basename(modis_file)), "r"
+            modis = rio.open(
+                join(modis_folder, basename(modis_file)), "r"
             )
-            m = interpolated_modis.read(1)
+            m = modis.read(1)
             quant_inf = m < np.nanquantile(m, 0.01)
             m[m > np.nanquantile(m, 0.99)] = np.nan
             m[quant_inf] = np.nan
@@ -110,10 +110,10 @@ for ext, sl in d_sl.items():
         out = np.zeros((*Tcrit.shape, 20), dtype=np.float16) - 1000
         for i, modis_file in tqdm(enumerate(modis_files), total=len(modis_files)):
             j = i // 12
-            interpolated_modis = rio.open(
-                join(interpolated_modis_folder, basename(modis_file)), "r"
+            modis = rio.open(
+                join(modis_folder, basename(modis_file)), "r"
             )
-            m = interpolated_modis.read(1)
+            m = modis.read(1)
             quant_inf = m < np.nanquantile(m, 0.01)
             m[m > np.nanquantile(m, 0.99)] = np.nan
             m[quant_inf] = np.nan

@@ -16,7 +16,7 @@ from utils import (
     modis_files,
     join,
     basename,
-    interpolated_modis_folder,
+    modis_folder,
     dense_vegetation,
     ssp,
     version,
@@ -68,10 +68,10 @@ for ext, sl in d_sl.items():
         for i, modis_file in tqdm(enumerate(modis_files), total=len(modis_files)):
             if i % 12 == 0:
                 data_species = np.zeros_like(Tcrit) - 1000
-            interpolated_modis = rio.open(
-                join(interpolated_modis_folder, basename(modis_file)), "r"
+            modis = rio.open(
+                join(modis_folder, basename(modis_file)), "r"
             )
-            m = interpolated_modis.read(1)
+            m = modis.read(1)
             quant_inf = m < np.nanquantile(m, 0.01)
             m[m > np.nanquantile(m, 0.99)] = np.nan
             m[quant_inf] = np.nan

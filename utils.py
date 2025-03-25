@@ -106,11 +106,11 @@ shape_full_map = rio.open(
     DATA_PATH + "/dense_vegetation/plant_fraction_LST_Day.tif", "r"
 ).shape
 
-interpolated_modis_folder = (
+modis_folder = (
     DATA_PATH
     + "/MODIS_LST"
 )
-modis_files = sorted(glob(join(interpolated_modis_folder, "*.tif")))
+modis_files = sorted(glob(join(modis_folder, "*.tif")))
 modis_files = [
     i
     for i in modis_files
