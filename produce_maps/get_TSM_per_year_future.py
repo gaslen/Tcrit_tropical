@@ -24,10 +24,10 @@ def get_exceeding_map(ext, sl, year="2001"):
             join(interpolated_modis_folder, basename(modis_file)), "r"
         )
         m = interpolated_modis.read(1)
-        m[dense_vegetation == 0] = np.nan
         quant_inf = m < np.nanquantile(m, 0.01)
         m[m > np.nanquantile(m, 0.99)] = np.nan
         m[quant_inf] = np.nan
+        m[dense_vegetation == 0] = np.nan
         data_species_ = np.nanmax(np.stack([m[sl], data_species_], axis=0), axis=0)
     data_species_[data_species_ == -1000] = np.nan
     ssps = (

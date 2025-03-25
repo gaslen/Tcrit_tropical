@@ -48,7 +48,6 @@ for ext, sl in d_sl.items():
             m[dense_vegetation == 0] = np.nan
             m = m[sl]
             data_species = m - Tcrit
-            data_species[data_species == 0] = np.nan
             out[..., j] = np.nanmax(
                 np.stack([data_species, out[..., j]], axis=0), axis=0
             )
