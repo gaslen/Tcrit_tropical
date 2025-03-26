@@ -3,7 +3,7 @@
 This repository contains the code associated with the PNAS submission **"Tropical forests are nearing critical temperature limits"**.
 
 ### **Data Access**
-- **Public Data:** All associated data will be accessed [here](<link_to_data>).
+- **Public Data:** All associated data (land surface temperatures, vegetation maps, SDMs outputs, air temperatures, Tcrit databases, ecoregions) will be accessed [here](https://zenodo.org/10.5281/zenodo.15083361). All the tar.gz archives should be extracted before use.
 
 ### **Setup**
 To set up the Python environment, run:
@@ -12,7 +12,7 @@ conda create --name ecostress python=3.11
 conda activate ecostress
 pip install -r requirements.txt
 ```
-:exclamation::exclamation::exclamation: Ensure the `DATA_PATH` in *merge_Tcrits_datasets.py* is set correctly to point to your local data directory. :exclamation::exclamation::exclamation:
+:exclamation::exclamation::exclamation: Ensure the `DATA_PATH` in *merge_Tcrits_datasets.py* is set correctly to point to your local data directory.
 
 ---
 
