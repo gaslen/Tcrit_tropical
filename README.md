@@ -3,7 +3,7 @@
 This repository contains the code associated with the PNAS submission **"Tropical forests are nearing critical temperature limits"**.
 
 ### **Data Access**
-- **Public Data:** All associated data (land surface temperatures, vegetation maps, SDMs outputs, air temperatures, Tcrit databases, ecoregions) will be accessed [here](https://zenodo.org/10.5281/zenodo.15083361). All the tar.gz archives should be extracted before use.
+- **Public Data:** All associated data (land surface temperatures, vegetation maps, SDMs outputs, air temperatures, Tcrit databases, ecoregions) will be accessed [here](https://zenodo.org/records/15083361). All the tar.gz archives should be extracted before use.
 
 ### **Setup**
 To set up the Python environment, run:
