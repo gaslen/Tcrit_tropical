@@ -108,7 +108,7 @@ shape_full_map = rio.open(
 
 modis_folder = (
     DATA_PATH
-    + "/MODIS_LST"
+    + "/MODIS_LST_Yearly"
 )
 modis_files = sorted(glob(join(modis_folder, "*.tif")))
 modis_files = [

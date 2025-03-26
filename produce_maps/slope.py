@@ -26,7 +26,7 @@ for ext, sl in d_sl.items():
     outfile = (
         DATA_PATH
         + f"/outputs/delta_T{TCRIT}_Tmodis{ext}_per_year_2001_2020_reversed{version}.npy"
-    )  # _: v11, nothing: v10
+    )  
     lr_outfile = (
         DATA_PATH
         + f"/outputs/LinearRegression_delta_T{TCRIT}_Tmodis{ext}_per_year_2001_2020{version}.npy"
@@ -37,20 +37,13 @@ for ext, sl in d_sl.items():
     if not exists(outfile):
         out = np.zeros((*Tcrit.shape, 20), dtype=np.float16) - 1000
         for i, modis_file in tqdm(enumerate(modis_files), total=len(modis_files)):
-            j = i // 12
             modis = rio.open(
                 join(modis_folder, basename(modis_file)), "r"
             )
             m = modis.read(1)
-            quant_inf = m < np.nanquantile(m, 0.01)
-            m[m > np.nanquantile(m, 0.99)] = np.nan
-            m[quant_inf] = np.nan
             m[dense_vegetation == 0] = np.nan
             m = m[sl]
-            data_species = m - Tcrit
-            out[..., j] = np.nanmax(
-                np.stack([data_species, out[..., j]], axis=0), axis=0
-            )
+            out[..., i] = m - Tcrit
         out[out == -1000] = np.nan
         np.save(outfile, out)
 
