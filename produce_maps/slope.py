@@ -68,7 +68,7 @@ for ext, sl in d_sl.items():
         np.save(lr_outfile, new_map)
 
 # for the Tmax analysis in the Appendix
-TCRIT = "max"
+# TCRIT = "max"
 
 if TCRIT == "min":
     Tcrit_map = rio.open(
@@ -92,10 +92,6 @@ for ext, sl in d_sl.items():
         DATA_PATH
         + f"/outputs/delta_T{TCRIT}_Tmodis{ext}_per_year_2001_2020_reversed{version}.npy"
     )  # _: v11, nothing: v10
-    lr_outfile = (
-        DATA_PATH
-        + f"/outputs/LinearRegression_delta_T{TCRIT}_Tmodis{ext}_per_year_2001_2020{version}.npy"
-    )
 
     Tcrit = Tcrit_map[sl]
 

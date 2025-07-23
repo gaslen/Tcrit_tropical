@@ -32,10 +32,9 @@ if __name__ == "__main__":
         output_min = np.full(shape_full_map, 1000.0)
         for sp in tqdm(list_species, total=len(list_species)):
             threshold_temp = float(
-                min(df[df["Plant species clean"] == sp]["Thermal Tolerance_deg.C"])
+                np.mean(df[df["Plant species clean"] == sp]["Thermal Tolerance_deg.C"])
             )
             merged_sp = join(path_species, sp)
-            sdm_1980 = rio.open(join(merged_sp, f"{sp}_covariates_{ssp}.tif"), "r")
             scaled_sdm_1980, window_sdm_1980 = scale_img(
                 join(merged_sp, f"{sp}_covariates_{ssp}.tif"),
                 DATA_PATH + "/dense_vegetation/plant_fraction_LST_Day.tif",
@@ -83,3 +82,9 @@ if __name__ == "__main__":
             **meta,
         ) as f:
             f.write(temp_count / total_count, indexes=1)
+        with rio.open(
+            expanduser(DATA_PATH + f"/outputs/species_count_map_{ssp}{version}.tif"),
+            "w",
+            **meta,
+        ) as f:
+            f.write(total_count, indexes=1)

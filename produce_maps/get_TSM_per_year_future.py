@@ -11,7 +11,7 @@ from utils import (
     modis_files,
     version,
 )
-from produce_maps.tcrit import Tcrit_map
+from produce_maps.tcrit import Tcrit_map, TCRIT
 from tqdm import tqdm
 from os.path import join, basename
 
@@ -30,7 +30,7 @@ def get_exceeding_map(ext, sl, year="2001"):
     )
     for ssp in ssps:
         Tcrit = rio.open(
-            DATA_PATH + f"/outputs/Tcrit_map_min_{ssp}{version}.tif", "r"
+            DATA_PATH + f"/outputs/Tcrit_map_{TCRIT}_{ssp}{version}.tif", "r"
         ).read(1)
         Tcrit[Tcrit == 1000] = np.nan
         Tcrit[Tcrit == 0] = np.nan

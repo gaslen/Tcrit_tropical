@@ -7,7 +7,7 @@ from utils import ssp, version, DATA_PATH
 from glob import glob
 
 
-TCRIT = "min"
+TCRIT = "mean"
 
 if TCRIT == "min":
     Tcrit_map = rio.open(

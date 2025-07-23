@@ -26,10 +26,9 @@ if __name__ == "__main__":
     total_count = np.zeros(modis_shape, dtype=np.uint8)
     for i, sp in enumerate(tqdm(list_species, total=len(list_species))):
         threshold_temp = float(
-            min(df[df["Plant species clean"] == sp]["Thermal Tolerance_deg.C"])
+            np.mean(df[df["Plant species clean"] == sp]["Thermal Tolerance_deg.C"])
         )
-        merged_sp = join(path_species, sp)
-        sdm_1980 = rio.open(join(merged_sp, f"{sp}_covariates_{ssp}.tif"), "r")
+        merged_sp = join(path_species, sp) # path to SDM dir
         scaled_sdm_1980, window_sdm_1980 = scale_img(
             join(merged_sp, f"{sp}_covariates_{ssp}.tif"), modis_files[0]
         )

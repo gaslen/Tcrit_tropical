@@ -3,7 +3,7 @@ import numpy as np
 from openpyxl import load_workbook
 
 version = "_v15"
-DATA_PATH = "/data/gaston/ecostress"
+DATA_PATH = "/home/nina/Documents/ecostress/data" #"/data/gaston/ecostress"
 
 # T50: some of Lancaster and Feeley. Slot and Perez can also be used with T50.
 
@@ -15,9 +15,7 @@ def is_strikethrough(cell):
     return False
 
 if __name__ == "__main__":
-    list_sdms_available = pd.read_csv(DATA_PATH + f"/data_species/list_species.csv")[
-        "species"
-    ].tolist()
+    list_sdms_available = pd.read_csv(DATA_PATH + f"/data_species/list_species.csv")["species"].tolist()
     merged_df = pd.DataFrame.from_dict(
         {"Plant species clean": [], "Thermal Tolerance_deg.C": []}
     )

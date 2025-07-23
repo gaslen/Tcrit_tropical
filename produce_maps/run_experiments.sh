@@ -19,7 +19,7 @@ echo "Batch 2 completed. Starting slope.py, skewness_map.py"
 # Run Batch 3 sequentially
 python slope.py && python skewness_map.py
 wait 
-echo "Batch 2 completed. Starting slope_tairmax.py"
+echo "Batch 3 completed. Starting slope_tairmax.py"
 python slope_tairmax.py
 wait 
 echo "All experiments completed."

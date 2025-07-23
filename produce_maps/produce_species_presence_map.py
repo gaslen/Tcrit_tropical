@@ -26,7 +26,7 @@ if __name__ == "__main__":
             species_map = np.zeros((*final_shape, len(list_species)), dtype=bool)
             for counter, sp in enumerate(tqdm(list_species, total=len(list_species))):
                 threshold_temp = float(
-                    min(
+                    np.mean(
                         df_species[df_species["Plant species clean"] == sp][
                             "Thermal Tolerance_deg.C"
                         ]
