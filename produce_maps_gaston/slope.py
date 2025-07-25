@@ -103,9 +103,8 @@ for ext, sl in d_sl.items():
                 join(modis_folder, basename(modis_file)), "r"
             )
             m = modis.read(1)
-            quant_inf = m < np.nanquantile(m, 0.01)
+            m[m < np.nanquantile(m, 0.01)] = np.nan
             m[m > np.nanquantile(m, 0.99)] = np.nan
-            m[quant_inf] = np.nan
             m[dense_vegetation == 0] = np.nan
             m = m[sl]
             data_species = m - Tcrit

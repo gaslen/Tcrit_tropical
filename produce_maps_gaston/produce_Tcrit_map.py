@@ -21,7 +21,6 @@ from utils import (
     DATA_PATH,
 )
 
-
 if __name__ == "__main__":
     meta = meta_full_map
     meta.update(compress="LZW")
@@ -62,6 +61,7 @@ if __name__ == "__main__":
             output_min[~np.isnan(threshold_map)] = np.minimum(
                 output_min, threshold_map
             )[~np.isnan(threshold_map)]
+            
         meta["dtype"] = "float64"
         meta["compress"] = "LZW"
         with rio.open(

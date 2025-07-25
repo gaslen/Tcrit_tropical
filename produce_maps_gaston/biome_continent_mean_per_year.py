@@ -72,7 +72,7 @@ for ext, sl in d_sl.items():
             m = modis.read(1)
             m[dense_vegetation == 0] = np.nan
             data_species = m[sl] - Tcrit
-            data_species[data_species == -1000] = np.nan
+            data_species[data_species <= -1000] = np.nan
 
             values = data_species[np.where(data_biomes)]
             weights_lon = compute_weights_lon(sl)

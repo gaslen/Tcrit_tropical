@@ -3,7 +3,8 @@ import numpy as np
 import sys
 
 sys.path.append("..")
-from utils import ssp, version, DATA_PATH
+ssp = "1981_2010" 
+from utils import version, DATA_PATH
 from glob import glob
 
 
