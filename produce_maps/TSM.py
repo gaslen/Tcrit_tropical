@@ -16,9 +16,7 @@ from utils import (
     dense_vegetation
 )
 
-ssp = "1981_2010"
-mean_tcrit_map = rio.open(DATA_PATH + f"/outputs/Tcrit_map_mean_{ssp}{version}.tif", "r").read(1)
-mean_tcrit_map[mean_tcrit_map == 0] = np.nan
+mean_tcrit_map = rio.open(DATA_PATH + f"/outputs/Tcrit_map_mean_1981_2010{version}.tif", "r").read(1)
 
 data_both_biomes = np.zeros(mean_tcrit_map.shape, dtype=bool)
 biomes = [
