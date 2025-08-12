@@ -66,6 +66,13 @@ def scale_img(img_file, support_file):
     )[0]
     return img_data, original_window_slice
 
+# https://stackoverflow.com/questions/1253499/simple-calculations-for-working-with-lat-lon-and-km-distance
+def compute_area_hectares(array, sl=None):
+    distance_array = np.abs(np.arange(21122) - 21122 // 2)  # distance from ecuator
+    res = rio.open(DATA_PATH + f"/outputs/Tcrit_map_mean_1981_2010{version}.tif", "r").res[0]
+    lon_meters = (np.cos(np.radians(distance_array * res)) * 111320 * res)[sl[0]]
+    lat_meters = res * 110574
+    return np.sum(lon_meters[np.where(array)[0]] * lat_meters / 10000)
 
 # def cast_small_in_large(large_rio_dataset, small_rio_dataset, value=np.nan):
 #     window = from_bounds(
@@ -119,13 +126,6 @@ def scale_img(img_file, support_file):
 #     weights = np.repeat(weights[:, np.newaxis], shp, axis=1)
 #     return weights[sl]
 
-
-# # https://stackoverflow.com/questions/1253499/simple-calculations-for-working-with-lat-lon-and-km-distance
-# def compute_area_hectares(array, sl=None):
-#     res = rio.open(DATA_PATH + f"/outputs/Tcrit_map_min_{ssp}{version}.tif", "r").res[0]
-#     lon_meters = (np.cos(np.radians(distance_array * res)) * 111320 * res)[sl[0]]
-#     lat_meters = res * 110574
-#     return np.sum(lon_meters[np.where(array)[0]] * lat_meters / 10000)
 
 
 # def weighted_quantile(
