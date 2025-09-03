@@ -74,6 +74,16 @@ def compute_area_hectares(array, sl=None):
     lat_meters = res * 110574
     return np.sum(lon_meters[np.where(array)[0]] * lat_meters / 10000)
 
+# def compute_weights_lon(sl=None):
+#     src = rio.open(DATA_PATH + f"/outputs/Tcrit_map_mean_{ssp}{version}.tif", "r")
+#     res = src.res[0]
+#     shp = src.shape[1]
+#     weights = np.cos(np.radians(distance_array * res)) * 111320 * res
+#     weights /= np.max(weights)
+#     weights = np.repeat(weights[:, np.newaxis], shp, axis=1)
+#     return weights[sl]
+
+
 # def cast_small_in_large(large_rio_dataset, small_rio_dataset, value=np.nan):
 #     window = from_bounds(
 #         *large_rio_dataset.bounds, large_rio_dataset.transform
@@ -116,15 +126,6 @@ def compute_area_hectares(array, sl=None):
 
 # distance_array = np.abs(np.arange(21122) - 21122 // 2)  # distance from ecuator
 
-
-# def compute_weights_lon(sl=None):
-#     src = rio.open(DATA_PATH + f"/outputs/Tcrit_map_mean_{ssp}{version}.tif", "r")
-#     res = src.res[0]
-#     shp = src.shape[1]
-#     weights = np.cos(np.radians(distance_array * res)) * 111320 * res
-#     weights /= np.max(weights)
-#     weights = np.repeat(weights[:, np.newaxis], shp, axis=1)
-#     return weights[sl]
 
 
 

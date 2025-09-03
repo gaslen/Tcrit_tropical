@@ -17,6 +17,7 @@ from utils import (
 )
 
 mean_tcrit_map = rio.open(DATA_PATH + f"/outputs/Tcrit_map_mean_1981_2010{version}.tif", "r").read(1)
+min_tcrit_map = rio.open(DATA_PATH + f"/outputs/Tcrit_map_min_1981_2010{version}.tif", "r").read(1)
 
 data_both_biomes = np.zeros(mean_tcrit_map.shape, dtype=bool)
 biomes = [
@@ -30,6 +31,7 @@ for biome_file in biome_files:
     data_both_biomes += data_biome
 
 for continent, slice in geo_slices.items():
+    print(continent)
     tcrit_slice = mean_tcrit_map[slice]
 
     outfile = (DATA_PATH + f"/outputs/TSM_2001_2020_{continent}_{version}.npy")
@@ -68,25 +70,41 @@ for continent, slice in geo_slices.items():
                     model.fit(x.reshape(-1, 1), y.reshape(-1, 1))
                     tsm_lr[i, j] = model.coef_[0][0]
         np.save(lr_outfile, tsm_lr)
+    
+    tsm_min_tcrit_outfile = (DATA_PATH + f"/outputs/TSM_minTcrit_2001_2020_{continent}_{version}.npy")
+    if not exists(tsm_min_tcrit_outfile):
+        print(f"Computing TSM with min Tcrit for {continent}")
+        min_tcrit_slice = min_tcrit_map[slice]
+        min_tsm = np.zeros((*min_tcrit_slice.shape, 20), dtype=np.float16) 
+        min_tsm[:,:] = np.nan
+        for i, modis_file in tqdm(enumerate(modis_files), total=len(modis_files)):
+            with rio.open(join(modis_folder, basename(modis_file)), "r") as src:
+                m = src.read(1)
+                m[dense_vegetation == 0] = np.nan
+                m[~data_both_biomes] = np.nan
+                m[m == -1000] = np.nan
+                m = m[slice]
+                min_tsm[..., i] = min_tcrit_slice - m
+        np.save(tsm_min_tcrit_outfile, min_tsm)
+        
+# print(f"Merging TSM maps")
+# tsm_2020_map = np.zeros_like(data_both_biomes).astype(float)
+# tsm_2020_map[:,:] = np.nan
+# for continent, slice in geo_slices.items():        
+#     tsm_file = DATA_PATH + f"/outputs/TSM_2001_2020_{continent}_{version}.npy"
+#     tsm_2020 = np.load(tsm_file)[...,-1]
+#     tsm_2020_map[slice] = tsm_2020
+# tsm_2020_map =  tsm_2020_map[slice_tropics]
+# np.save(DATA_PATH + f"/outputs/TSM_2020{version}.npy", tsm_2020_map)
 
-print(f"Merging TSM maps")
-tsm_2020_map = np.zeros_like(data_both_biomes).astype(float)
-tsm_2020_map[:,:] = np.nan
-for continent, slice in geo_slices.items():        
-    tsm_file = DATA_PATH + f"/outputs/TSM_2001_2020_{continent}_{version}.npy"
-    tsm_2020 = np.load(tsm_file)[...,-1]
-    tsm_2020_map[slice] = tsm_2020
-tsm_2020_map =  tsm_2020_map[slice_tropics]
-np.save(DATA_PATH + f"/outputs/TSM_2020{version}.npy", tsm_2020_map)
-
-print(f"Merging TSM Linear Regression maps")
-lr_2001_2020_map = np.zeros_like(data_both_biomes).astype(float)
-lr_2001_2020_map[:,:] = np.nan
-for continent, slice in geo_slices.items():        
-    lr_file = DATA_PATH + f"/outputs/LinearRegression_TSM_2001_2020_{continent}_{version}.npy"
-    lr = np.load(lr_file)
-    lr_2001_2020_map[slice] = lr
-lr_2001_2020_map =  lr_2001_2020_map[slice_tropics]
-np.save(DATA_PATH + f"/outputs/LinearRegression_TSM_2001_2020{version}.npy", lr_2001_2020_map)
+# print(f"Merging TSM Linear Regression maps")
+# lr_2001_2020_map = np.zeros_like(data_both_biomes).astype(float)
+# lr_2001_2020_map[:,:] = np.nan
+# for continent, slice in geo_slices.items():        
+#     lr_file = DATA_PATH + f"/outputs/LinearRegression_TSM_2001_2020_{continent}_{version}.npy"
+#     lr = np.load(lr_file)
+#     lr_2001_2020_map[slice] = lr
+# lr_2001_2020_map =  lr_2001_2020_map[slice_tropics]
+# np.save(DATA_PATH + f"/outputs/LinearRegression_TSM_2001_2020{version}.npy", lr_2001_2020_map)
 
 

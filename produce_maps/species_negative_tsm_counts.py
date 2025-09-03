@@ -57,7 +57,8 @@ for year in ['2001', '2020', '2050', '2100']:
 
         for sp in tqdm(list_species, total=len(list_species)):
             sp_tcrit = float(np.mean(species_df[species_df["Plant species clean"] == sp]["Thermal Tolerance_deg.C"]))
-            sdm, window_sdm = scale_img(join(path_sdms, sp, f"{sp}_covariates_1981_2010.tif"), 
+            covs = '1981_2010' if (year == '2001' or year == '2020') else ('2041_2070_ssp370' if year == '2050' else '2071_2100_ssp370')
+            sdm, window_sdm = scale_img(join(path_sdms, sp, f"{sp}_covariates_{covs}.tif"), 
                                         DATA_PATH + "/dense_vegetation/plant_fraction_LST_Day.tif")
             sp_map = np.zeros(shape_full_map)
             sdm_int_slice = (slice(round(window_sdm[0].start),round(window_sdm[0].stop),None,),
