@@ -20,19 +20,19 @@ if __name__ == "__main__":
         {"Plant species clean": [], "Thermal Tolerance_deg.C": []}
     )
 
-    df_lancaster = pd.read_excel(DATA_PATH + f"/data_species/pnas.1918162117.sd01.xlsx")
-    df_lancaster = df_lancaster[df_lancaster["Tmin or Tmax"] == "Tmax"]
-    df_lancaster["Tolerance measure"][
-        (df_lancaster["Tolerance measure"] == "T50")
-    ] = "Tcrit"
-    df_lancaster = df_lancaster[
-        (df_lancaster["Tolerance measure"] == "Tcrit")
-    ]  
-    species = set([i for i in df_lancaster["Plant species clean"]])
-    list_nature = df_lancaster["Plant species clean"].tolist()
-    common_list = set(list_nature).intersection(list_sdms_available)
-    print("Lancaster", len(common_list))
-    df_lancaster = df_lancaster[df_lancaster["Plant species clean"].isin(common_list)]
+    # df_lancaster = pd.read_excel(DATA_PATH + f"/data_species/pnas.1918162117.sd01.xlsx")
+    # df_lancaster = df_lancaster[df_lancaster["Tmin or Tmax"] == "Tmax"]
+    # df_lancaster["Tolerance measure"][
+    #     (df_lancaster["Tolerance measure"] == "T50")
+    # ] = "Tcrit"
+    # df_lancaster = df_lancaster[
+    #     (df_lancaster["Tolerance measure"] == "Tcrit")
+    # ]  
+    # species = set([i for i in df_lancaster["Plant species clean"]])
+    # list_nature = df_lancaster["Plant species clean"].tolist()
+    # common_list = set(list_nature).intersection(list_sdms_available)
+    # print("Lancaster", len(common_list))
+    # df_lancaster = df_lancaster[df_lancaster["Plant species clean"].isin(common_list)]
 
     df_sullivan = pd.read_excel(DATA_PATH + f"/data_species/gcb13477-sup-0002-tables7.xlsx")
     df_sullivan = df_sullivan.rename(
@@ -52,39 +52,39 @@ if __name__ == "__main__":
     print("Sullivan", len(common_list2))
     df_sullivan = df_sullivan[df_sullivan["Plant species clean"].isin(common_list2)]
 
-    df_Middleby = pd.DataFrame.from_dict(
-        {
-            "Plant species clean": [
-                "Terminalia_microcarpa",
-                "Castanospermum_australe",
-                "Castanospermum_australe",
-            ],
-            "Thermal Tolerance_deg.C": [47.7, 46.6, 49.6],
-        }
-    )
-    df_Middleby["Tmin or Tmax"] = "Tmax"
-    species_Middleby = set([i for i in df_Middleby["Plant species clean"]])
-    common_list = species_Middleby.intersection(list_sdms_available)
-    print("Middleby", len(common_list))
-    df_Middleby = df_Middleby[df_Middleby["Plant species clean"].isin(common_list)]
-    # from: https://www.authorea.com/users/802804/articles/1187938-ecotypic-variation-in-leaf-thermoregulation-and-heat-tolerance-but-not-thermal-safety-margins-in-tropical-trees
+    # df_Middleby = pd.DataFrame.from_dict(
+    #     {
+    #         "Plant species clean": [
+    #             "Terminalia_microcarpa",
+    #             "Castanospermum_australe",
+    #             "Castanospermum_australe",
+    #         ],
+    #         "Thermal Tolerance_deg.C": [47.7, 46.6, 49.6],
+    #     }
+    # )
+    # df_Middleby["Tmin or Tmax"] = "Tmax"
+    # species_Middleby = set([i for i in df_Middleby["Plant species clean"]])
+    # common_list = species_Middleby.intersection(list_sdms_available)
+    # print("Middleby", len(common_list))
+    # df_Middleby = df_Middleby[df_Middleby["Plant species clean"].isin(common_list)]
+    # # from: https://www.authorea.com/users/802804/articles/1187938-ecotypic-variation-in-leaf-thermoregulation-and-heat-tolerance-but-not-thermal-safety-margins-in-tropical-trees
 
 
-    df_Tarvainen = pd.DataFrame.from_dict(
-        {
-            "Plant species clean": [
-                "Harungana_montana",
-                "Syzygium_guineense",
-                "Entandrophragma_exselsum",
-            ],
-            "Thermal Tolerance_deg.C": [40, 40, 40],
-        }
-    )
-    df_Tarvainen["Tmin or Tmax"] = "Tmax"  # 3 especes anyway...
-    species_Tarvainen = set([i for i in df_Tarvainen["Plant species clean"]])
-    common_list = species_Tarvainen.intersection(list_sdms_available)
-    print("Tarvainen", len(common_list))
-    df_Tarvainen = df_Tarvainen[df_Tarvainen["Plant species clean"].isin(common_list)]
+    # df_Tarvainen = pd.DataFrame.from_dict(
+    #     {
+    #         "Plant species clean": [
+    #             "Harungana_montana",
+    #             "Syzygium_guineense",
+    #             "Entandrophragma_exselsum",
+    #         ],
+    #         "Thermal Tolerance_deg.C": [40, 40, 40],
+    #     }
+    # )
+    # df_Tarvainen["Tmin or Tmax"] = "Tmax"  # 3 especes anyway...
+    # species_Tarvainen = set([i for i in df_Tarvainen["Plant species clean"]])
+    # common_list = species_Tarvainen.intersection(list_sdms_available)
+    # print("Tarvainen", len(common_list))
+    # df_Tarvainen = df_Tarvainen[df_Tarvainen["Plant species clean"].isin(common_list)]
 
 
     # Perez & Feeley: https://onlinelibrary.wiley.com/doi/full/10.1111/jbi.13984
@@ -104,35 +104,35 @@ if __name__ == "__main__":
     df_perez = df_perez[df_perez["Plant species clean"].isin(common_list)]
 
 
-    file_path = DATA_PATH + f"/data_species/Table_1_Feeley.xlsx"
-    # https://www.frontiersin.org/journals/forests-and-global-change/articles/10.3389/ffgc.2020.00025/full#h11
-    df_feeley = pd.read_excel(file_path, skiprows=2)
-    # Load the workbook with openpyxl
-    wb = load_workbook(file_path)
-    sheet = wb.active  # Get the active sheet (or use sheet names)
-    for row in sheet.iter_rows(
-        min_row=4, max_row=sheet.max_row, min_col=1, max_col=sheet.max_column
-    ):
-        for cell in row:
-            if is_strikethrough(cell):
-                df_feeley.iloc[cell.row - 4, cell.column - 1] = f"Strikethrough"
-    df_feeley = df_feeley[df_feeley["T50 (95% CI)"] != "Strikethrough"]
-    df_feeley = df_feeley[~df_feeley["Species"].isnull()]
-    df_feeley["T50 (95% CI)"] = [float(i.split(" ")[0]) for i in df_feeley["T50 (95% CI)"]]
-    df_feeley = df_feeley.rename(
-        columns={
-            "Species": "Plant species clean",
-            "T50 (95% CI)": "Thermal Tolerance_deg.C",
-        }
-    )
-    df_feeley["Plant species clean"] = [
-        i.replace(" ", "_") for i in df_feeley["Plant species clean"]
-    ]
-    df_feeley["Tmin or Tmax"] = "Tmax"
-    species_feeley = set([i for i in df_feeley["Plant species clean"]])
-    common_list = species_feeley.intersection(list_sdms_available)
-    print("Feeley", len(common_list))
-    df_feeley = df_feeley[df_feeley["Plant species clean"].isin(common_list)]
+    # file_path = DATA_PATH + f"/data_species/Table_1_Feeley.xlsx"
+    # # https://www.frontiersin.org/journals/forests-and-global-change/articles/10.3389/ffgc.2020.00025/full#h11
+    # df_feeley = pd.read_excel(file_path, skiprows=2)
+    # # Load the workbook with openpyxl
+    # wb = load_workbook(file_path)
+    # sheet = wb.active  # Get the active sheet (or use sheet names)
+    # for row in sheet.iter_rows(
+    #     min_row=4, max_row=sheet.max_row, min_col=1, max_col=sheet.max_column
+    # ):
+    #     for cell in row:
+    #         if is_strikethrough(cell):
+    #             df_feeley.iloc[cell.row - 4, cell.column - 1] = f"Strikethrough"
+    # df_feeley = df_feeley[df_feeley["T50 (95% CI)"] != "Strikethrough"]
+    # df_feeley = df_feeley[~df_feeley["Species"].isnull()]
+    # df_feeley["T50 (95% CI)"] = [float(i.split(" ")[0]) for i in df_feeley["T50 (95% CI)"]]
+    # df_feeley = df_feeley.rename(
+    #     columns={
+    #         "Species": "Plant species clean",
+    #         "T50 (95% CI)": "Thermal Tolerance_deg.C",
+    #     }
+    # )
+    # df_feeley["Plant species clean"] = [
+    #     i.replace(" ", "_") for i in df_feeley["Plant species clean"]
+    # ]
+    # df_feeley["Tmin or Tmax"] = "Tmax"
+    # species_feeley = set([i for i in df_feeley["Plant species clean"]])
+    # common_list = species_feeley.intersection(list_sdms_available)
+    # print("Feeley", len(common_list))
+    # df_feeley = df_feeley[df_feeley["Plant species clean"].isin(common_list)]
 
     df_slot = pd.read_excel(
         DATA_PATH + f"/data_species/Tcrit_147 tropical_forest_species.xlsx"
