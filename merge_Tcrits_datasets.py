@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from openpyxl import load_workbook
 
-version = "_v15"
+version = "_v20"
 DATA_PATH = "/home/nina/Documents/ecostress/data" #"/data/gaston/ecostress"
 
 # T50: some of Lancaster and Feeley. Slot and Perez can also be used with T50.
@@ -175,6 +175,7 @@ if __name__ == "__main__":
     merged_df = pd.concat([merged_df, df_bison])
     
     merged_df = merged_df[merged_df["Thermal Tolerance_deg.C"] <= 55]
+    merged_df = merged_df[merged_df["Thermal Tolerance_deg.C"] >= 35]
 
 
     print("Total", len(set([i for i in merged_df["Plant species clean"]])))
@@ -194,3 +195,4 @@ if __name__ == "__main__":
     # v15: add bison
     # v16: only slot and perez for comparable methods
     # v17: only sullivan and bison
+    # v20: remove Tcrit <= 35deg.C
