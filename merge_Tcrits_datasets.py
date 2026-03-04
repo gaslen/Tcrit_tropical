@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from openpyxl import load_workbook
 
-version = "_v20"
+version = "_v21"
 DATA_PATH = "/home/nina/Documents/ecostress/data" #"/data/gaston/ecostress"
 
 # T50: some of Lancaster and Feeley. Slot and Perez can also be used with T50.
@@ -90,6 +90,7 @@ if __name__ == "__main__":
     # Perez & Feeley: https://onlinelibrary.wiley.com/doi/full/10.1111/jbi.13984
     # Weak phylogenetic and climatic signals in plant heat tolerance
     df_perez = pd.read_csv(DATA_PATH + f"/data_species/Perez.and.Feeley.2020.csv")
+    df_perez = df_perez[df_perez["crown.illumination"] >= 4] # remove species with low crown illumination, which can bias Tcrit values
     df_perez = df_perez.rename(
         columns={"species": "Plant species clean", "Tcrit": "Thermal Tolerance_deg.C"}
     )  # T50 instead of Tcrit
@@ -196,3 +197,4 @@ if __name__ == "__main__":
     # v16: only slot and perez for comparable methods
     # v17: only sullivan and bison
     # v20: remove Tcrit <= 35deg.C
+    # v21: remove Tcrit with crown.illumination <4 in Perez dataset.

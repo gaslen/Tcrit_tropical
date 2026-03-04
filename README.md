@@ -22,24 +22,16 @@ pip install -r requirements.txt
   **`merge_Tcrits_datasets.py`**: Merges the different Tcrit datasets.
 
 - **Map Generation:**  
-  The **`produce_maps`** python scripts generate:  
-  - Critical temperature maps  
-  - Species count per pixel  
-  - Skewness map  
-  - TSM maps  
-  - Linear regression coefficients per pixel  
-  - TSM variations by quantile  
-
-- **Running Experiments:**  
-  **`run_experiments.sh`**: Executes all required scripts sequentially.
-  In **`produce_maps`**:
-  ```bash
-  bash run_experiments.sh
-  ```
+  The python scripts in the **`produce_maps`** folder generate the maps used in the figures and analysis.  
+  - **`Tcrit.py`**: generates critical temperature maps  
+  - **`TSM.py`**: generates TSM maps and linear regression coefficients per pixel  
+  **`species_negative_tsm_counts.py`**: generates maps of total species counts and counts of species with negative TSM values
+  - **`TSM_future.py`**: generates TSM maps for future projections 
 
 - **Figures and numbers generation:**  
-  The **`create_structure_figures_folders.py`** script create the structure of the folders used to save the figures.
-  The **`figures_numbers`** scripts create figures and compute numbers for the paper.
+  All figures are made in the **`figures.ipynb`** notebook.
+  <!-- The **`create_structure_figures_folders.py`** script create the structure of the folders used to save the figures. -->
+  <!-- The **`figures_numbers`** scripts create figures and compute numbers for the paper. -->
 
 ---
 
