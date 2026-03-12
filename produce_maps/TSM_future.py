@@ -57,6 +57,12 @@ for continent, slice in geo_slices.items():
         np.save(outfile, tsm)
 
         # Compute TSM with future LST and acclimation 
-        outfile_acclim = (DATA_PATH + f"/outputs/TSM_{year}_acclim_{continent}_{version}.npy")
+        # 0.38°C is the mean acclimation potential for all trees in O'Sullivan et al. 2017
+        outfile_acclim = (DATA_PATH + f"/outputs/TSM_{year}_acclim_038_{continent}_{version}.npy")
         tsm_acclim = tsm + (delta_tsurf[slice] * 0.38)
         np.save(outfile_acclim, tsm_acclim)
+        
+        # 0.49°C is the mean acclimation potential for tropical trees in O'Sullivan et al. 2017
+        outfile_acclim_tropical = (DATA_PATH + f"/outputs/TSM_{year}_acclim_049_{continent}_{version}.npy")
+        tsm_acclim_tropical = tsm + (delta_tsurf[slice] * 0.49)
+        np.save(outfile_acclim_tropical, tsm_acclim_tropical)
