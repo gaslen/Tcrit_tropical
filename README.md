@@ -1,9 +1,6 @@
 # **Tropical forests are facing increasing risks of exposure to critical temperature thresholds**
 
-This repository contains the code associated with the paper **"Tropical forests are facing increasing risks of exposure to critical temperature thresholds"** published in PNAS.
-
-### **Data Access**
-- **Public Data:** All associated data (land surface temperatures, vegetation maps, SDMs outputs, air temperatures, Tcrit databases, ecoregions) will be accessed [here](https://zenodo.org/records/15083361). All the tar.gz archives should be extracted before use.
+This repository contains the code associated with the paper **"Tropical forests are facing increasing risks of exposure to critical temperature thresholds"**.
 
 ### **Setup**
 To set up the Python environment, run:
